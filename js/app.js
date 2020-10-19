@@ -1,5 +1,5 @@
 'use strict';
-
+// let list = ['narwhal', 'rhino', 'unicorn', 'unilego', 'triceratops', 'markhor', 'mouflon', 'addax', 'chameleon', 'lizard', 'dragon'];
 let hornsArr = [];
 function Horn(title, image_url, description, keyword, horns) {
   this.title = title;
@@ -12,26 +12,58 @@ function Horn(title, image_url, description, keyword, horns) {
 
 Horn.prototype.printOut = function () {
 
-  console.log(this.title);
   let printed = $('.horn-box').clone();
   $('main').append(printed);
   printed.find('h2').text(this.title);
   printed.find('img').attr('src', this.image_url);
   printed.find('p').text(this.description);
-  printed.attr('class', this.title);
+  printed.attr('class', this.keyword);
 };
 
-for (let i=0; i<hornsArr.length ; i++){
-  let menu = $('.choice').clone();
-  $('select').append(menu);
-  menu.text(hornsArr[i].keyword);
-}
 
 
 const ajaxSettings = {
   method: 'get',
   dataType: 'json'
 };
+
+
+$.ajax('data/page-1.json', ajaxSettings).then((data) => {
+
+  let list = [];
+  data.forEach((getKeyword) => {
+    if (list.indexOf(getKeyword.keyword) === -1) {
+      list.push(getKeyword.keyword);
+      $('#menu').append(
+        $('<option/>')
+          .attr('value', getKeyword.keyword)
+          .text(getKeyword.keyword)
+      );
+    }
+
+
+  });
+  $('select').change(function () {
+    $('section').hide();
+    let str = [];
+    $('select option:selected').each(function () {
+      str.push($(this).val());
+
+      for (let i = 0; i < hornsArr.length; i++) {
+        console.log(hornsArr[i]);
+        if ($(this).val() === hornsArr[i].keyword) {
+          console.log('equal');
+          $(`.${$(this).val()}`).show();
+
+        }
+      }
+
+    });
+  });
+
+});
+
+
 
 $.ajax('data/page-1.json', ajaxSettings).then((data) => {
   data.forEach(hn => {
@@ -46,3 +78,4 @@ $.ajax('data/page-1.json', ajaxSettings).then((data) => {
   });
 });
 console.log(hornsArr);
+
