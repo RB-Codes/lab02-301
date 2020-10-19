@@ -1,10 +1,4 @@
-img {
-    width: 230px;
-    height: 200px;
-}
-.horn-box {
-    display: none;
-}
+
 h1 {
     font-family: 'Indie Flower', cursive;
     font-size: 40px;
@@ -22,8 +16,6 @@ p {
     font-family: 'Barlow Semi Condensed', sans-serif;
     font-size: 16px;
     color: rgb(197, 184, 126);
-    /* margin-top: 5px;
-    margin-bottom: 5px; */
     width: 230px;
     text-align: center;    
 }
