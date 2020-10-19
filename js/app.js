@@ -50,9 +50,7 @@ $.ajax('data/page-1.json', ajaxSettings).then((data) => {
       str.push($(this).val());
 
       for (let i = 0; i < hornsArr.length; i++) {
-        console.log(hornsArr[i]);
         if ($(this).val() === hornsArr[i].keyword) {
-          console.log('equal');
           $(`.${$(this).val()}`).show();
 
         }
@@ -77,5 +75,4 @@ $.ajax('data/page-1.json', ajaxSettings).then((data) => {
     }
   });
 });
-console.log(hornsArr);
 
